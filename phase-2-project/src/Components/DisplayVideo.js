@@ -6,7 +6,7 @@ export default class DisplayVideo extends Component {
   
   render() {
 
-    let randomNum = Math.floor(Math.random() * (1 + 49 - 0)) + 0
+    let randomNum = Math.floor(Math.random() * this.props.categoryChosen.length)
     console.log(randomNum)
     
 

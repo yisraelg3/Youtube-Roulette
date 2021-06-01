@@ -28,11 +28,11 @@ class App extends React.Component {
   }
   
   render () {
-    // this.handleChooseCategory()
+   const categoryArr = this.state.categories.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
     return (
       <div className="App">
         <UserLogin />
-        <Categories categories={this.state.categories} />
+        <Categories categories={categoryArr} />
         <Search />
         <GenerateLists />
       </div>
