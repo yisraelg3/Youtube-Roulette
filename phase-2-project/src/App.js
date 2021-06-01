@@ -10,10 +10,13 @@ import GenerateLists from './Components/GenerateLists';
 
 class App extends React.Component {
   
-  YOUR_API_KEY = 
+  YOUR_API_KEY =
 
   state = {
     categories: [],
+    watched: [],
+    recent: [],
+    favorites: []
   }
   
   componentDidMount(){
@@ -25,16 +28,27 @@ class App extends React.Component {
         categories: categoryObj.items
       })
     })
+    fetch('http://localhost:3000/users/1')
+    .then(res => res.json())
+    .then(user => {
+      console.log(user)
+      this.setState({
+      watched: user.watched,
+      recent: user.recent,
+      favorites: user.favorites
+    })})
   }
   
   render () {
+    // filter for unavailable categories
    const categoryArr = this.state.categories.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
     return (
       <div className="App">
         <UserLogin />
-        <Categories categories={categoryArr} />
+        <Categories categories={categoryArr} watched={this.state.watched}/>
         <Search />
-        <GenerateLists />
+        <GenerateLists header='Recent' list={this.state.recent}/>
+        <GenerateLists header='Favorites' list={this.state.favorites}/>
       </div>
     )
   }

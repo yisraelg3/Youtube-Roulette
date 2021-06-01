@@ -26,7 +26,7 @@ export default class Categories extends Component {
 
     return (
       <div>
-         <DisplayVideo categoryChosen={this.state.chosenCategoryVideos}/>
+         <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} watched={this.props.watched}/>
         {categoryCards}
       </div>
     )
