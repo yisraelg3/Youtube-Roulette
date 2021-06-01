@@ -41,27 +41,28 @@ class App extends React.Component {
 
   transferVideoId = (videoId) => {
     console.log(this.state)
+    console.log(videoId.Id)
     fetch("http://localhost:3000/users/1", {
       method: "PATCH",
       headers: {
       "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        watched: [... this.state.watched,  {
+        watched: [...this.state.watched,  {
           title: videoId.snippet.title,
           timesWatched: 1,
           category: videoId.snippet.categoryId,
-          videoiD: videoId.videoId}],
-        recent: [... this.state.recent, {
+          videoId: videoId.Id}],
+        recent: [...this.state.recent, {
           title: videoId.snippet.title,
-          videoiD: videoId.videoId}]
+          videoId: videoId.Id}]
         })
         })
       .then((r) => r.json())
       .then((userObj) => {
         this.setState({
-          watched: userObj.Watched,
-          recent: userObj.Recent
+          watched: userObj.watched,
+          recent: userObj.recent
         })})
   }
   

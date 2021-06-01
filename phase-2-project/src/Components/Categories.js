@@ -5,10 +5,9 @@ import DisplayVideo from './DisplayVideo'
 export default class Categories extends Component {
 
    YOUR_API_KEY = 
-
     state = {
       chosenCategoryVideos: [],
-      randomNum: ""
+      // randomNum: ""
     }
 
     handleChooseCategory = (category) => {
@@ -18,7 +17,6 @@ export default class Categories extends Component {
       .then(chosenCategoryArray => {
         this.setState({
           chosenCategoryVideos: chosenCategoryArray.items,
-          randomNum: Math.floor(Math.random() * this.state.chosenCategoryVideos.length)
         })})
 
     
@@ -28,13 +26,24 @@ export default class Categories extends Component {
   
     render() {
     // console.log(this.props.categories)
-    const categoryCards = this.props.categories.map(category => <CategoryCard handleChooseCategory={this.handleChooseCategory} category={category} key={category.id}/>)
+    let randomNum = Math.floor(Math.random() * this.state.chosenCategoryVideos.length)
+    console.log(this.state.chosenCategoryVideos.length) 
+    console.log(randomNum)
+    const categoryCards = this.props.categories.map(category => {
+    return <CategoryCard handleChooseCategory={this.handleChooseCategory} 
+    category={category} key={category.id}
+    transferVideoId={this.props.transferVideoId}
+    chosenCategoryVideos={this.state.chosenCategoryVideos}
+    randomNum={randomNum}/>})
     
     
 
     return (
       <div>
-         <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} randomNum = {this.state.randomNum} watched={this.props.watched} transferVideoId={this.props.transferVideoId}/>
+         <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} 
+         randomNum = {randomNum} 
+         watched={this.props.watched} 
+         transferVideoId={this.props.transferVideoId}/>
         {categoryCards}
       </div>
     )

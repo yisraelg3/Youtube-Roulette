@@ -10,7 +10,7 @@ export default class DisplayVideo extends Component {
     return (
       this.props.categoryChosen[this.props.randomNum]?  
       <iframe src={`https://www.youtube.com/embed/${this.props.categoryChosen[this.props.randomNum].id}`} 
-      title='1' allowFullScreen onChange={this.props.transferVideoId(this.props.categoryChosen[this.props.randomNum])}></iframe> : ""
+      title='1' allowFullScreen ></iframe> : ""
         )
 
   }
