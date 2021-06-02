@@ -21,7 +21,7 @@ export default class UserLogin extends Component {
     .then(potentialArr => {
       if (potentialArr.length > 0) {
         if (potentialArr[0].password === event.target.password.value) {
-          this.props.getUserId(potentialArr.id)
+          this.props.getUserId(potentialArr[0].id)
           alert(`${event.target.username.value} has logged in`)
         } else {
           alert ('Incorrect Password')

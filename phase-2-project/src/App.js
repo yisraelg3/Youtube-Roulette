@@ -17,7 +17,8 @@ class App extends React.Component {
     watched: [],
     recent: [],
     favorites: [],
-    userId: 1
+    userId: 1,
+    whatUserTyped: ""
   }
   
   componentDidMount(){
@@ -37,7 +38,8 @@ class App extends React.Component {
       watched: user.watched,
       recent: user.recent,
       favorites: user.favorites
-    })})
+    })
+  console.log(this.state)})
   }
 
   getUserId = (userId) => {
@@ -92,20 +94,32 @@ class App extends React.Component {
         })})
   }
   
+  changeSearchTerm = (newTerm) => {
+    this.setState({
+      whatUserTyped: newTerm
+    })}
+
+
   render () {
     // filter for unavailable categories
    const categoryArr = this.state.categories.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
-    return (
+    // console.log(categoryArr.snippet)
+ 
+   let filteredCategories = categoryArr.filter((categoryObj, idx) => {
+      return categoryObj.snippet.title.toLowerCase().includes(this.state.whatUserTyped.toLowerCase())
+    })
+   
+   return (
       <div className="App">
-        <UserLogin getUserId={this.getUserId}/>
         {this.state.userId !== 1 ?
         <div>
-        <Categories categories={categoryArr} watched={this.state.watched} transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite}/>
-        <Search />
+        <button onClick = {() => this.setState({ userId: 1})}> Logout </button>
+        <Search whatUserTyped={this.state.whatUserTyped} changeSearchTerm={this.changeSearchTerm}/>
+        <Categories categories={filteredCategories} watched={this.state.watched} transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite}/>
         <GenerateLists header='Recent' list={this.state.recent}/>
         <GenerateLists header='Favorites' list={this.state.favorites}/>
         </div>
-        : ''}
+        : <UserLogin getUserId={this.getUserId}/> }
       </div> 
     )
   }
