@@ -4,44 +4,51 @@ import DisplayVideo from './DisplayVideo'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = 
-    state = {
+   YOUR_API_KEY = 'AIzaSyBfGXfNLPoTZsaCLmpEQFgvCaDyzR8ujCg'
+    
+   randomNum = ''
+   state = {
       chosenCategoryVideos: [],
-      // randomNum: ""
     }
 
     handleChooseCategory = (category) => {
-      // console.log(category)
       fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=US&videoCategoryId=${category}&maxResults=50&key=${this.YOUR_API_KEY}`)
       .then(res => res.json())
       .then(chosenCategoryArray => {
+        // console.log(chosenCategoryArray)
+        const unwatchedList = chosenCategoryArray.items.filter(videoObj => {
+          return !this.props.watched.find(watchedVideo => videoObj.id === watchedVideo.videoId)
+        })
+        console.log(unwatchedList)
+        this.randomNum = Math.floor(Math.random() * unwatchedList.length)
+        // console.log('Click arguments',category,this.randomNum)
+        this.props.transferVideoId(unwatchedList[this.randomNum])
         this.setState({
-          chosenCategoryVideos: chosenCategoryArray.items,
+          chosenCategoryVideos: unwatchedList,
         })})
 
-    
-        
-    //     this.props.transferVideoId(categoryChosen[this.props.randomNum])
      }
   
     render() {
     // console.log(this.props.categories)
-    let randomNum = Math.floor(Math.random() * this.state.chosenCategoryVideos.length)
-    console.log(this.state.chosenCategoryVideos.length) 
-    console.log(randomNum)
+
+    // console.log('render',this.randomNum)
+    
     const categoryCards = this.props.categories.map(category => {
-    return <CategoryCard handleChooseCategory={this.handleChooseCategory} 
-    category={category} key={category.id}
-    transferVideoId={this.props.transferVideoId}
-    chosenCategoryVideos={this.state.chosenCategoryVideos}
-    randomNum={randomNum}/>})
+      return <CategoryCard 
+        handleChooseCategory={this.handleChooseCategory} 
+        category={category} key={category.id}
+        transferVideoId={this.props.transferVideoId}
+        chosenCategoryVideos={this.state.chosenCategoryVideos}
+      />
+    })
     
     
 
     return (
       <div>
          <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} 
-         randomNum = {randomNum} 
+         randomNum = {this.randomNum} 
          watched={this.props.watched} 
          transferVideoId={this.props.transferVideoId}/>
         {categoryCards}

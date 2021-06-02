@@ -10,7 +10,7 @@ import GenerateLists from './Components/GenerateLists';
 
 class App extends React.Component {
   
-  YOUR_API_KEY = 
+  YOUR_API_KEY = 'AIzaSyBfGXfNLPoTZsaCLmpEQFgvCaDyzR8ujCg'
 
   state = {
     categories: [],
@@ -39,9 +39,9 @@ class App extends React.Component {
     })})
   }
 
-  transferVideoId = (videoId) => {
+  transferVideoId = (videoObj) => {
     console.log(this.state)
-    console.log(videoId.Id)
+    console.log(videoObj)
     fetch("http://localhost:3000/users/1", {
       method: "PATCH",
       headers: {
@@ -49,13 +49,13 @@ class App extends React.Component {
       },
       body: JSON.stringify({
         watched: [...this.state.watched,  {
-          title: videoId.snippet.title,
+          title: videoObj.snippet.title,
           timesWatched: 1,
-          category: videoId.snippet.categoryId,
-          videoId: videoId.Id}],
+          category: videoObj.snippet.categoryId,
+          videoId: videoObj.id}],
         recent: [...this.state.recent, {
-          title: videoId.snippet.title,
-          videoId: videoId.Id}]
+          title: videoObj.snippet.title,
+          videoId: videoObj.id}]
         })
         })
       .then((r) => r.json())
