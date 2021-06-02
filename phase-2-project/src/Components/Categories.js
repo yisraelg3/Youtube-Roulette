@@ -4,7 +4,7 @@ import DisplayVideo from './DisplayVideo'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = 'AIzaSyBfGXfNLPoTZsaCLmpEQFgvCaDyzR8ujCg'
+   YOUR_API_KEY = 
     
    randomNum = ''
    state = {

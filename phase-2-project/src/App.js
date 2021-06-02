@@ -10,7 +10,7 @@ import GenerateLists from './Components/GenerateLists';
 
 class App extends React.Component {
   
-  YOUR_API_KEY = 'AIzaSyBfGXfNLPoTZsaCLmpEQFgvCaDyzR8ujCg'
+  YOUR_API_KEY = 
 
   state = {
     categories: [],
