@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import CategoryCard from './CategoryCard'
 import DisplayVideo from './DisplayVideo'
 
+
 export default class Categories extends Component {
 
-   YOUR_API_KEY = 'AIzaSyBfGXfNLPoTZsaCLmpEQFgvCaDyzR8ujCg'
+   YOUR_API_KEY = 'AIzaSyABg9Jtg67nQMahdfBV5ijoRJ2dgq7_qoQ'
     
    randomNum = ''
    state = {
@@ -19,7 +20,7 @@ export default class Categories extends Component {
         const unwatchedList = chosenCategoryArray.items.filter(videoObj => {
           return !this.props.watched.find(watchedVideo => videoObj.id === watchedVideo.videoId)
         })
-        console.log(unwatchedList)
+        // console.log(unwatchedList)
         this.randomNum = Math.floor(Math.random() * unwatchedList.length)
         // console.log('Click arguments',category,this.randomNum)
         this.props.transferVideoId(unwatchedList[this.randomNum])
@@ -40,17 +41,14 @@ export default class Categories extends Component {
         category={category} key={category.id}
         transferVideoId={this.props.transferVideoId}
         chosenCategoryVideos={this.state.chosenCategoryVideos}
+        randomNum={this.randomNum}
+        watched={this.props.watched}
+        routerProps={this.props.routerProps}
       />
     })
     
-    
-
     return (
       <div>
-         <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} 
-         randomNum = {this.randomNum} 
-         watched={this.props.watched} 
-         transferVideoId={this.props.transferVideoId}/>
         {categoryCards}
       </div>
     )

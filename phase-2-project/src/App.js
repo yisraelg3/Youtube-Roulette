@@ -5,12 +5,13 @@ import Categories from './Components/Categories';
 import UserLogin from './Components/UserLogin';
 import Search from './Components/Search';
 import GenerateLists from './Components/GenerateLists';
+import {Route} from 'react-router-dom'
 
 
 
 class App extends React.Component {
   
-  YOUR_API_KEY = 'AIzaSyBfGXfNLPoTZsaCLmpEQFgvCaDyzR8ujCg'
+  YOUR_API_KEY = 'AIzaSyABg9Jtg67nQMahdfBV5ijoRJ2dgq7_qoQ'
 
   state = {
     categories: [],
@@ -40,8 +41,8 @@ class App extends React.Component {
   }
 
   transferVideoId = (videoObj) => {
-    console.log(this.state)
-    console.log(videoObj)
+    // console.log(this.state)
+    // console.log(videoObj)
     fetch("http://localhost:3000/users/1", {
       method: "PATCH",
       headers: {
@@ -71,11 +72,11 @@ class App extends React.Component {
    const categoryArr = this.state.categories.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
     return (
       <div className="App">
-        <UserLogin />
-        <Categories categories={categoryArr} watched={this.state.watched} transferVideoId ={this.transferVideoId}/>
-        <Search />
-        <GenerateLists header='Recent' list={this.state.recent}/>
-        <GenerateLists header='Favorites' list={this.state.favorites}/>
+        <Route exact path ='/' render={routerProps => <UserLogin {...routerProps}/>}/>
+        <Route exact path ='/categories' render={routerProps => <Categories {...routerProps} categories={categoryArr} watched={this.state.watched} transferVideoId ={this.transferVideoId}/>} />
+        <Route exact path ='/search' render={routerProps => <Search {...routerProps}/>} />
+        <Route exact path ='/recent' render={routerProps => <GenerateLists header='Recent' list={this.state.recent}/> }/>
+        <Route exact path ='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites}/>} />
       </div>
     )
   }
