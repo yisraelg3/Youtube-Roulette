@@ -30,27 +30,21 @@ class App extends React.Component {
         categories: categoryObj.items
       })
     })
-    fetch(`http://localhost:3000/users/${this.state.userId}`)
-    .then(res => res.json())
-    .then(user => {
-      // console.log(this.state)
-      this.setState({
-      watched: user.watched,
-      recent: user.recent,
-      favorites: user.favorites
-    })
-  console.log(this.state)})
   }
 
-  getUserId = (userId) => {
+  getUserId = (user) => {
+    // console.log(this.state)
     this.setState({
-      userId: userId
+      watched: user.watched,
+      recent: user.recent,
+      favorites: user.favorites,
+      userId: user.id
     })
   }
 
   transferVideoId = (videoObj) => {
-    console.log(this.state)
-    console.log(videoObj)
+    // console.log(this.state)
+    // console.log(videoObj)
     fetch(`http://localhost:3000/users/${this.state.userId}`, {
       method: "PATCH",
       headers: {
@@ -75,6 +69,7 @@ class App extends React.Component {
         })})
   }
 
+  
   newFavorite = (videoObj) => {
     fetch(`http://localhost:3000/users/${this.state.userId}`, {
       method: "PATCH",
@@ -101,6 +96,7 @@ class App extends React.Component {
 
 
   render () {
+    // console.log(this.state)
     // filter for unavailable categories
    const categoryArr = this.state.categories.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
     // console.log(categoryArr.snippet)

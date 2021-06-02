@@ -19,7 +19,7 @@ export default class Categories extends Component {
         const unwatchedList = chosenCategoryArray.items.filter(videoObj => {
           return !this.props.watched.find(watchedVideo => videoObj.id === watchedVideo.videoId)
         })
-        console.log(unwatchedList)
+        // console.log(unwatchedList)
         this.randomNum = Math.floor(Math.random() * unwatchedList.length)
         // console.log('Click arguments',category,this.randomNum)
         this.props.transferVideoId(unwatchedList[this.randomNum])
