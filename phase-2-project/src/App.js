@@ -10,7 +10,7 @@ import GenerateLists from './Components/GenerateLists';
 
 class App extends React.Component {
   
-  YOUR_API_KEY = 
+  YOUR_API_KEY = ""
 
   state = {
     categories: [],
@@ -65,6 +65,25 @@ class App extends React.Component {
           recent: userObj.recent
         })})
   }
+
+  newFavorite = (videoObj) => {
+    fetch("http://localhost:3000/users/1", {
+      method: "PATCH",
+      headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        favorites: [...this.state.favorites, {
+          title: videoObj.snippet.title,
+          videoId: videoObj.id}]
+        })
+        })
+      .then((r) => r.json())
+      .then((userObj) => {
+        this.setState({
+          favorites: userObj.favorites
+        })})
+  }
   
   render () {
     // filter for unavailable categories
@@ -72,7 +91,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <UserLogin />
-        <Categories categories={categoryArr} watched={this.state.watched} transferVideoId ={this.transferVideoId}/>
+        <Categories categories={categoryArr} watched={this.state.watched} transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite}/>
         <Search />
         <GenerateLists header='Recent' list={this.state.recent}/>
         <GenerateLists header='Favorites' list={this.state.favorites}/>

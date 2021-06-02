@@ -4,7 +4,7 @@ import DisplayVideo from './DisplayVideo'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = 
+   YOUR_API_KEY = ""
     
    randomNum = ''
    state = {
@@ -50,7 +50,9 @@ export default class Categories extends Component {
          <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} 
          randomNum = {this.randomNum} 
          watched={this.props.watched} 
-         transferVideoId={this.props.transferVideoId}/>
+         transferVideoId={this.props.transferVideoId}
+         newFavorite={this.props.newFavorite}
+         />
         {categoryCards}
       </div>
     )
