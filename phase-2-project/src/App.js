@@ -16,7 +16,8 @@ class App extends React.Component {
     categories: [],
     watched: [],
     recent: [],
-    favorites: []
+    favorites: [],
+    userId: 1
   }
   
   componentDidMount(){
@@ -28,7 +29,7 @@ class App extends React.Component {
         categories: categoryObj.items
       })
     })
-    fetch('http://localhost:3000/users/1')
+    fetch(`http://localhost:3000/users/${this.state.userId}`)
     .then(res => res.json())
     .then(user => {
       // console.log(this.state)
@@ -39,10 +40,16 @@ class App extends React.Component {
     })})
   }
 
+  getUserId = (userId) => {
+    this.setState({
+      userId: userId
+    })
+  }
+
   transferVideoId = (videoObj) => {
     console.log(this.state)
     console.log(videoObj)
-    fetch("http://localhost:3000/users/1", {
+    fetch(`http://localhost:3000/users/${this.state.userId}`, {
       method: "PATCH",
       headers: {
       "Content-Type": "application/json",
@@ -67,7 +74,7 @@ class App extends React.Component {
   }
 
   newFavorite = (videoObj) => {
-    fetch("http://localhost:3000/users/1", {
+    fetch(`http://localhost:3000/users/${this.state.userId}`, {
       method: "PATCH",
       headers: {
       "Content-Type": "application/json",
@@ -90,12 +97,16 @@ class App extends React.Component {
    const categoryArr = this.state.categories.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
     return (
       <div className="App">
-        <UserLogin />
+        <UserLogin getUserId={this.getUserId}/>
+        {this.state.userId !== 1 ?
+        <div>
         <Categories categories={categoryArr} watched={this.state.watched} transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite}/>
         <Search />
         <GenerateLists header='Recent' list={this.state.recent}/>
         <GenerateLists header='Favorites' list={this.state.favorites}/>
-      </div>
+        </div>
+        : ''}
+      </div> 
     )
   }
 
