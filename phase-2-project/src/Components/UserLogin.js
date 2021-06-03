@@ -26,11 +26,10 @@ export default class UserLogin extends Component {
           alert(`${event.target.username.value} has logged in`)
         } else {
           alert ('Incorrect Password')
+          this.setState({
+            password: ''
+          })
         }
-        this.setState({
-          username: '',
-          password: ''
-        })
       } else {
         this.setState({
           username: '',
@@ -78,23 +77,23 @@ export default class UserLogin extends Component {
   render() {
     return (
       <div>
-         {this.state.login ?
-         <div>
-        <button onClick={this.handleClick}>New User? Click here!</button>
-        <form onSubmit={this.handleLogin}>
-          <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='Enter Username'></input>
-          <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='Enter Password'></input>
-          <input type='submit' value='Login'></input>
-        </form>
+        {this.state.login ?
+        <div>
+          <button onClick={this.handleClick}>New User? Click here!</button>
+          <form onSubmit={this.handleLogin}>
+            <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='Enter Username'></input>
+            <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='Enter Password'></input>
+            <input type='submit' value='Login'></input>
+          </form>
         </div>
         :
         <div>
-        <button onClick={this.handleClick}>Existing User? Login Here</button>
-        <form onSubmit={this.handleNewUser}>
-          <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='New Username'></input>
-          <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='New Password'></input>
-          <input type='submit' value='Create New User'></input>
-        </form>
+          <button onClick={this.handleClick}>Existing User? Login Here</button>
+          <form onSubmit={this.handleNewUser}>
+            <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='New Username'></input>
+            <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='New Password'></input>
+            <input type='submit' value='Create New User'></input>
+          </form>
         </div>}
       </div>
     )

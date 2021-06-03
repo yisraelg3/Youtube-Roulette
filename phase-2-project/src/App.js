@@ -26,8 +26,10 @@ class App extends React.Component {
     .then(res => res.json())
     .then(categoryObj => {
       // console.log(categoryObj)
+      //filter for unavailable categories
+      const categoryArr = categoryObj.items.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
       this.setState({
-        categories: categoryObj.items
+        categories: categoryArr
       })
     })
   }
@@ -42,7 +44,7 @@ class App extends React.Component {
     })
   }
 
-  transferVideoId = (videoObj) => {
+  transferVideoId = (videoObj,category) => {
     // console.log(this.state)
     // console.log(videoObj)
     fetch(`http://localhost:3000/users/${this.state.userId}`, {
@@ -54,7 +56,7 @@ class App extends React.Component {
         watched: [...this.state.watched,  {
           title: videoObj.snippet.title,
           timesWatched: 1,
-          category: videoObj.snippet.categoryId,
+          category: category,
           videoId: videoObj.id}],
         recent: [...this.state.recent, {
           title: videoObj.snippet.title,
@@ -71,6 +73,10 @@ class App extends React.Component {
 
   
   newFavorite = (videoObj) => {
+    if (this.state.favorites.some(video => video.videoId === videoObj.videoId)) {
+      alert('Video already in Favorites')
+      return
+    }
     fetch(`http://localhost:3000/users/${this.state.userId}`, {
       method: "PATCH",
       headers: {
@@ -78,8 +84,8 @@ class App extends React.Component {
       },
       body: JSON.stringify({
         favorites: [...this.state.favorites, {
-          title: videoObj.snippet.title,
-          videoId: videoObj.id}]
+          title: videoObj.title,
+          videoId: videoObj.videoId}]
         })
         })
       .then((r) => r.json())
@@ -88,23 +94,37 @@ class App extends React.Component {
           favorites: userObj.favorites
         })})
   }
+
+  deleteItem = (listName, videoObj) => {
+    const list = listName.toLowerCase()
+    fetch(`http://localhost:3000/users/${this.state.userId}`, {
+      method: "PATCH",
+      headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        [list]: this.state[list].filter(video => video.videoId !== videoObj.videoId)
+        })
+      })
+      .then((r) => r.json())
+      .then((userObj) => {
+        this.setState({
+          [list]: userObj[list]
+        })})
+  }
   
   changeSearchTerm = (newTerm) => {
     this.setState({
       whatUserTyped: newTerm
     })}
 
-
-  render () {
-    // console.log(this.state)
-    // filter for unavailable categories
-   const categoryArr = this.state.categories.filter(category => category.snippet.assignable === true && !category.id.match(/19|29$/))
-    // console.log(categoryArr.snippet)
- 
-   let filteredCategories = categoryArr.filter((categoryObj, idx) => {
+  render  () {
+   // filter for Search
+   let filteredCategories = this.state.categories.filter((categoryObj, idx) => {
       return categoryObj.snippet.title.toLowerCase().includes(this.state.whatUserTyped.toLowerCase())
     })
-   
+    
+    // console.log(timesCategoryWatched)
    return (
       <div className="App">
         {this.state.userId !== 1 ?
@@ -112,8 +132,8 @@ class App extends React.Component {
         <button onClick = {() => this.setState({ userId: 1})}> Logout </button>
         <Search whatUserTyped={this.state.whatUserTyped} changeSearchTerm={this.changeSearchTerm}/>
         <Categories categories={filteredCategories} watched={this.state.watched} transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite}/>
-        <GenerateLists header='Recent' list={this.state.recent}/>
-        <GenerateLists header='Favorites' list={this.state.favorites}/>
+        <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem}/>
+        <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem}/>
         </div>
         : <UserLogin getUserId={this.getUserId}/> }
       </div> 
