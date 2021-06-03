@@ -44,7 +44,7 @@ playingVid = ""
           Back
         </button>
         <iframe src={`https://www.youtube.com/embed/${this.props.watched[this.props.watched.length-1-this.state.count].videoId}`} 
-          title='1' allowFullScreen ></iframe> 
+          title='1' allowFullScreen width='600' height='400'></iframe> 
           <button onClick={this.handleSkip}>
             Skip
           </button>

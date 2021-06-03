@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CategoryCard from './CategoryCard'
 import DisplayVideo from './DisplayVideo'
+import { Card } from 'semantic-ui-react'
 
 export default class Categories extends Component {
 
@@ -73,7 +74,7 @@ export default class Categories extends Component {
         newFavorite={this.props.newFavorite}/>
         <label htmlFor='sort'>Sort by Most Watched</label>
         <input type='checkbox' checked={this.state.sorted} onChange={this.handleChange} id='sort'></input>
-        {categoryCards}
+        <Card.Group raised itemsPerRow={4} >{categoryCards}</Card.Group>
       </div>
     )
   }
