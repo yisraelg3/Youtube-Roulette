@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button, Icon, Header, Checkbox, Form } from 'semantic-ui-react'
 
 export default class UserLogin extends Component {
   
@@ -80,21 +81,67 @@ export default class UserLogin extends Component {
       <div>
         {this.state.login ?
         <div>
-          <button onClick={this.handleClick}>New User? Click here!</button>
-          <form onSubmit={this.handleLogin}>
+          <Header as='h1' textAlign='center'>
+          <Icon name='youtube' color='red'/>
+          <Header.Content>
+            Youtube Roulette
+            <Header.Subheader>A New YouTube Experience</Header.Subheader>
+          </Header.Content>
+        </Header> 
+          {/* <button onClick={this.handleClick}>New User? Click here!</button> */}
+          <Button onClick={this.handleClick} animated='fade'>
+            <Button.Content visible>New User? Click here!</Button.Content>
+            <Button.Content hidden>Welcome!</Button.Content>
+          </Button>
+          {/* <form onSubmit={this.handleLogin}>
             <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='Enter Username'></input>
             <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='Enter Password'></input>
             <input type='submit' value='Login'></input>
-          </form>
+          </form> */}
+          <Form onSubmit={this.handleLogin}>
+            <Form.Field>
+              <label>Username</label>
+              <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='Enter Username' />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='Enter Password' />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+          </Form>
         </div>
         :
         <div>
-          <button onClick={this.handleClick}>Existing User? Login Here</button>
-          <form onSubmit={this.handleNewUser}>
+          <Header as='h1' textAlign='center'>
+          <Icon name='youtube' color='red'/>
+          <Header.Content>
+            Youtube Roulette
+            <Header.Subheader>A New YouTube Experience</Header.Subheader>
+          </Header.Content>
+        </Header> 
+          {/* <button onClick={this.handleClick}>Existing User? Login Here</button> */}
+          <Button onClick={this.handleClick}>
+            <Button.Content visible>Existing User? Login Here</Button.Content>
+          </Button>
+          {/* <form onSubmit={this.handleNewUser}>
             <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='New Username'></input>
             <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='New Password'></input>
             <input type='submit' value='Create New User'></input>
-          </form>
+          </form> */}
+          <Form onSubmit={this.handleNewUser}>
+            <Form.Field>
+              <label>Username</label>
+              <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='New Username'></input>
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='New Password'></input>
+            </Form.Field>
+            <Form.Field>
+              <Checkbox label='I agree to the Terms and Conditions' />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+          </Form>
         </div>}
       </div>
     )

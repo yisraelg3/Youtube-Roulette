@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = "AIzaSyDvGGhx6gjeDrGElG6F-JtbhD69L9nOXC8"
+   YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
     
    randomNum = ''
    state = {

@@ -7,10 +7,12 @@ import Search from './Components/Search';
 import GenerateLists from './Components/GenerateLists';
 import NavBar from './Components/NavBar'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import { Button, Icon, Label, Header } from 'semantic-ui-react'
+
 
 class App extends React.Component {
   
-  YOUR_API_KEY = "AIzaSyDvGGhx6gjeDrGElG6F-JtbhD69L9nOXC8"
+  YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
 
   state = {
     categories: [],
@@ -18,7 +20,8 @@ class App extends React.Component {
     recent: [],
     favorites: [],
     userId: 1,
-    whatUserTyped: ""
+    whatUserTyped: "",
+    userName: ""
   }
   
   componentDidMount(){
@@ -39,7 +42,8 @@ class App extends React.Component {
       watched: user.watched,
       recent: user.recent,
       favorites: user.favorites,
-      userId: user.id
+      userId: user.id,
+      userName: user.user
     })
   }
 
@@ -145,11 +149,26 @@ class App extends React.Component {
     // console.log(timesCategoryWatched)
    return (
       <div className="App">
-        
+        {this.state.userId !== 1 ?
         <div>
         {redirect()}
         <Route path='/categories' render={routerProps => { return(
         <>
+        <Button as='div' labelPosition='left' floated='right' >
+          <Label as='a' basic>
+            {this.state.userName}
+          </Label>
+          <Button onClick = {() => this.setState({ userId: 1})}>
+            Logout
+          </Button>
+        </Button> 
+        <Header as='h1' textAlign='center'>
+          <Icon name='youtube' color='red'/>
+          <Header.Content>
+            Youtube Roulette
+            <Header.Subheader>A New YouTube Experience</Header.Subheader>
+          </Header.Content>
+        </Header> 
         <Search whatUserTyped={this.state.whatUserTyped} changeSearchTerm={this.changeSearchTerm}/>
         <Categories categories={filteredCategories} watched={this.state.watched} 
         transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite} userId={this.state.userId}/>
@@ -159,7 +178,8 @@ class App extends React.Component {
         <Route path='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem}/>}/>
 
         </div>
-        
+        : 
+        <UserLogin getUserId={this.getUserId}/> }
       </div> 
     )
   }
