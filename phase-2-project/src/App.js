@@ -5,12 +5,12 @@ import Categories from './Components/Categories';
 import UserLogin from './Components/UserLogin';
 import Search from './Components/Search';
 import GenerateLists from './Components/GenerateLists';
-
-
+import NavBar from './Components/NavBar'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 class App extends React.Component {
   
-  YOUR_API_KEY = ""
+  YOUR_API_KEY = "AIzaSyDvGGhx6gjeDrGElG6F-JtbhD69L9nOXC8"
 
   state = {
     categories: [],
@@ -35,7 +35,6 @@ class App extends React.Component {
   }
 
   getUserId = (user) => {
-    // console.log(this.state)
     this.setState({
       watched: user.watched,
       recent: user.recent,
@@ -73,6 +72,7 @@ class App extends React.Component {
 
   
   newFavorite = (videoObj) => {
+    console.log(videoObj)
     if (this.state.favorites.some(video => video.videoId === videoObj.videoId)) {
       alert('Video already in Favorites')
       return
@@ -117,25 +117,49 @@ class App extends React.Component {
     this.setState({
       whatUserTyped: newTerm
     })}
+    
+    logout = () => {
+      // console.log(this.state.userId)
+      this.setState({userId: 1})
+    }
 
   render  () {
+    const redirect = () => {
+      if (this.state.userId > 1) {
+      return  (
+      <>
+      <Route path='/' render={routerProps => <NavBar logout={this.logout}/>}/>
+      <Switch>
+      <Redirect from='/' to='/categories'/> 
+      </Switch>
+      </>)
+      }
+    }
+    
    // filter for Search
    let filteredCategories = this.state.categories.filter((categoryObj, idx) => {
       return categoryObj.snippet.title.toLowerCase().includes(this.state.whatUserTyped.toLowerCase())
     })
     
+    console.log(this.state.userId)
     // console.log(timesCategoryWatched)
    return (
       <div className="App">
-        {this.state.userId !== 1 ?
+        
         <div>
-        <button onClick = {() => this.setState({ userId: 1})}> Logout </button>
+        {redirect()}
+        <Route path='/categories' render={routerProps => { return(
+        <>
         <Search whatUserTyped={this.state.whatUserTyped} changeSearchTerm={this.changeSearchTerm}/>
-        <Categories categories={filteredCategories} watched={this.state.watched} transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite}/>
-        <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem}/>
-        <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem}/>
+        <Categories categories={filteredCategories} watched={this.state.watched} 
+        transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite} userId={this.state.userId}/>
+        </>)}}/>
+        <Route exact path='/' render={routerProps => <UserLogin userId={this.state.userId} getUserId={this.getUserId}/> }/> 
+        <Route path='/recent' render={routeProps => <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem}/>}/>
+        <Route path='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem}/>}/>
+
         </div>
-        : <UserLogin getUserId={this.getUserId}/> }
+        
       </div> 
     )
   }

@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import CategoryCard from './CategoryCard'
 import DisplayVideo from './DisplayVideo'
 import { Card } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = ""
+   YOUR_API_KEY = "AIzaSyDvGGhx6gjeDrGElG6F-JtbhD69L9nOXC8"
     
    randomNum = ''
    state = {
@@ -38,7 +39,8 @@ export default class Categories extends Component {
      }
 
     render() {
-    // Logic for sorting by most times chosen
+    
+    // Logic for sorting by most times watched
     const timesCategoryWatched = this.state.sorted ?
     this.props.categories.map(category => {
       return(
