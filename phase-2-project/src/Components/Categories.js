@@ -65,13 +65,12 @@ export default class Categories extends Component {
     
     return (
       <div>
-      {this.state.chosenCategoryVideos[this.randomNum]?  
        <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} 
         randomNum = {this.randomNum} 
         watched={this.props.watched} 
         transferVideoId={this.props.transferVideoId}
-        newFavorite={this.props.newFavorite}
-        />: ""}
+        handleChooseCategory={this.handleChooseCategory}
+        newFavorite={this.props.newFavorite}/>
         <label htmlFor='sort'>Sort by Most Watched</label>
         <input type='checkbox' checked={this.state.sorted} onChange={this.handleChange} id='sort'></input>
         {categoryCards}
