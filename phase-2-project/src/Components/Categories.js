@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import CategoryCard from './CategoryCard'
 import DisplayVideo from './DisplayVideo'
-import { Card } from 'semantic-ui-react'
+import { Card, Input, label } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
+   YOUR_API_KEY = ""
     
    randomNum = ''
    state = {

@@ -89,7 +89,7 @@ export default class UserLogin extends Component {
           </Header.Content>
         </Header> 
           {/* <button onClick={this.handleClick}>New User? Click here!</button> */}
-          <Button onClick={this.handleClick} animated='fade'>
+          <Button floated='right' onClick={this.handleClick} animated='fade'>
             <Button.Content visible>New User? Click here!</Button.Content>
             <Button.Content hidden>Welcome!</Button.Content>
           </Button>
@@ -120,7 +120,7 @@ export default class UserLogin extends Component {
           </Header.Content>
         </Header> 
           {/* <button onClick={this.handleClick}>Existing User? Login Here</button> */}
-          <Button onClick={this.handleClick}>
+          <Button floated='right' onClick={this.handleClick}>
             <Button.Content visible>Existing User? Login Here</Button.Content>
           </Button>
           {/* <form onSubmit={this.handleNewUser}>

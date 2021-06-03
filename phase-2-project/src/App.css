@@ -2,6 +2,23 @@
   text-align: center;
 }
 
+div.ui.four.cards {
+  margin-right: 80px;
+  margin-left: 80px;
+}
+
+.search {
+  position:relative; left:0px; top:-50px
+}
+
+.labeled {
+  position:relative; left:0px; top:40px
+}
+
+.header {
+  position:relative; left:0px; top:0px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

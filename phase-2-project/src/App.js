@@ -12,7 +12,7 @@ import { Button, Icon, Label, Header } from 'semantic-ui-react'
 
 class App extends React.Component {
   
-  YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
+  YOUR_API_KEY = ""
 
   state = {
     categories: [],
@@ -162,7 +162,7 @@ class App extends React.Component {
             Logout
           </Button>
         </Button> 
-        <Header as='h1' textAlign='center'>
+        <Header as='h1' textAlign='center' >
           <Icon name='youtube' color='red'/>
           <Header.Content>
             Youtube Roulette
