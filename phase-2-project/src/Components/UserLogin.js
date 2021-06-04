@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, Header, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Icon, Header, Checkbox, Form, Input } from 'semantic-ui-react'
 
 export default class UserLogin extends Component {
   
@@ -93,11 +93,6 @@ export default class UserLogin extends Component {
             <Button.Content visible>New User? Click here!</Button.Content>
             <Button.Content hidden>Welcome!</Button.Content>
           </Button>
-          {/* <form onSubmit={this.handleLogin}>
-            <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='Enter Username'></input>
-            <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='Enter Password'></input>
-            <input type='submit' value='Login'></input>
-          </form> */}
           <Form onSubmit={this.handleLogin}>
             <Form.Field>
               <label>Username</label>
@@ -123,25 +118,20 @@ export default class UserLogin extends Component {
           <Button floated='right' onClick={this.handleClick}>
             <Button.Content visible>Existing User? Login Here</Button.Content>
           </Button>
-          {/* <form onSubmit={this.handleNewUser}>
-            <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='New Username'></input>
-            <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='New Password'></input>
-            <input type='submit' value='Create New User'></input>
-          </form> */}
-          <Form onSubmit={this.handleNewUser}>
-            <Form.Field>
-              <label>Username</label>
-              <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='New Username'></input>
-            </Form.Field>
-            <Form.Field>
-              <label>Password</label>
-              <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='New Password'></input>
-            </Form.Field>
-            <Form.Field>
-              <Checkbox label='I agree to the Terms and Conditions' />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
-          </Form>
+              <Form onSubmit={this.handleNewUser}>
+                <Form.Field>
+                  <label>Username</label>
+                  <input type='text' value={this.state.username} id='username' name='username' onChange={this.handleChange} placeholder='New Username' width="48"></input>
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='New Password'></input>
+                </Form.Field>
+                <Form.Field>
+                  <Checkbox label='I agree to the Terms and Conditions' />
+                </Form.Field>
+                <Button type='submit'>Submit</Button>
+              </Form>
         </div>}
       </div>
     )

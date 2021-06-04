@@ -12,7 +12,7 @@ import { Button, Icon, Label, Header } from 'semantic-ui-react'
 
 class App extends React.Component {
   
-  YOUR_API_KEY = ""
+  YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
 
   state = {
     categories: [],
@@ -148,11 +148,11 @@ class App extends React.Component {
     console.log(this.state.userId)
     // console.log(timesCategoryWatched)
    return (
-      <div className="App">
+      <main className="App">
         {this.state.userId !== 1 ?
-        <div>
+        <main >
         {redirect()}
-        <Route path='/categories' render={routerProps => { return(
+        <Route className="navBar" path='/categories' render={routerProps => { return(
         <>
         <Button as='div' labelPosition='left' floated='right' >
           <Label as='a' basic>
@@ -162,13 +162,15 @@ class App extends React.Component {
             Logout
           </Button>
         </Button> 
-        <Header as='h1' textAlign='center' >
-          <Icon name='youtube' color='red'/>
-          <Header.Content>
-            Youtube Roulette
-            <Header.Subheader>A New YouTube Experience</Header.Subheader>
-          </Header.Content>
-        </Header> 
+        
+          <Header as='h1' textAlign='center' >
+            <Icon name='youtube' color='red'/>
+            <Header.Content>
+              Youtube Roulette
+              <Header.Subheader>A New YouTube Experience</Header.Subheader>
+            </Header.Content>
+          </Header> 
+        
         <Search whatUserTyped={this.state.whatUserTyped} changeSearchTerm={this.changeSearchTerm}/>
         <Categories categories={filteredCategories} watched={this.state.watched} 
         transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite} userId={this.state.userId}/>
@@ -177,10 +179,10 @@ class App extends React.Component {
         <Route path='/recent' render={routeProps => <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem}/>}/>
         <Route path='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem}/>}/>
 
-        </div>
+        </main>
         : 
         <UserLogin getUserId={this.getUserId}/> }
-      </div> 
+      </main> 
     )
   }
 

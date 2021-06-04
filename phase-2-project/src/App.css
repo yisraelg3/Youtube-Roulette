@@ -5,18 +5,45 @@
 div.ui.four.cards {
   margin-right: 80px;
   margin-left: 80px;
+  position:relative; left: 0px; top:12px;
+}
+div {
+  text-align:center
 }
 
-.search {
-  position:relative; left:0px; top:-50px
+div.ui.right.floated.left.labeled.button {
+  position:relative; left: 0px; top:40px;
 }
 
-.labeled {
-  position:relative; left:0px; top:40px
+input#username {
+  width: 300px;
 }
+
+label {
+  text-align:;
+}
+
+.videoPlayer {
+  height: 700px;
+  text-align: center;
+}
+
+input#password {
+  width: 300px;
+}
+
+div.ui.search {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 200px;
+  position:relative; left: 0px; top:-50px
+}
+
 
 .header {
-  position:relative; left:0px; top:0px;
+  position:relative; left:0px; top: 0px;
+  width: 225px;
 }
 
 .App-logo {

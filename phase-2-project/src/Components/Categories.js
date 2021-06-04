@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = ""
+   YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
     
    randomNum = ''
    state = {
@@ -67,7 +67,7 @@ export default class Categories extends Component {
     
     
     return (
-      <div>
+      <main>
        <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} 
         randomNum = {this.randomNum} 
         watched={this.props.watched} 
@@ -77,7 +77,7 @@ export default class Categories extends Component {
         <label htmlFor='sort'>Sort by Most Watched</label>
         <input type='checkbox' checked={this.state.sorted} onChange={this.handleChange} id='sort'></input>
         <Card.Group raised itemsPerRow={4} >{categoryCards}</Card.Group>
-      </div>
+      </main>
     )
   }
 }
