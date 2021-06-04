@@ -3,6 +3,7 @@
 }
 
 div.ui.four.cards {
+  margin-top: 20px;
   margin-right: 80px;
   margin-left: 80px;
   position:relative; left: 0px; top:12px;
@@ -19,9 +20,9 @@ input#username {
   width: 300px;
 }
 
-label {
-  text-align:;
-}
+/* label {
+  text-align: center;
+} */
 
 .videoPlayer {
   height: 700px;
@@ -41,10 +42,10 @@ div.ui.search {
 }
 
 
-.header {
+/* .header {
   position:relative; left:0px; top: 0px;
   width: 225px;
-}
+} */
 
 .App-logo {
   height: 40vmin;

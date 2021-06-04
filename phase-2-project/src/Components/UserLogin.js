@@ -24,7 +24,7 @@ export default class UserLogin extends Component {
       if (potentialArr.length > 0) {
         if (potentialArr[0].password === event.target.password.value) {
           this.props.getUserId(potentialArr[0])
-          alert(`${event.target.username.value} has logged in`)
+          // alert(`${event.target.username.value} has logged in`)
         } else {
           alert ('Incorrect Password')
           this.setState({
@@ -60,7 +60,7 @@ export default class UserLogin extends Component {
       })
       .then((r) => r.json())
       .then((user) => {
-        alert(`You have created the user ${user.user}!`)
+        // alert(`You have created the user ${user.user}!`)
         this.props.getUserId(user)})
         this.setState({
           username: '',
@@ -115,8 +115,9 @@ export default class UserLogin extends Component {
           </Header.Content>
         </Header> 
           {/* <button onClick={this.handleClick}>Existing User? Login Here</button> */}
-          <Button floated='right' onClick={this.handleClick}>
+          <Button floated='right' onClick={this.handleClick} animated='fade'>
             <Button.Content visible>Existing User? Login Here</Button.Content>
+            <Button.Content hidden>Existing User? Login Here</Button.Content>
           </Button>
               <Form onSubmit={this.handleNewUser}>
                 <Form.Field>

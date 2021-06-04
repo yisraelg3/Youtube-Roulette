@@ -11,10 +11,14 @@ playingVid = ""
   }
 
   handleFavorite = (evt) => {
-      this.props.newFavorite(this.props.categoryChosen[this.props.randomNum])
+      this.props.newFavorite(this.props.watched[this.props.watched.length-1-this.state.count])
   }
   
   handleBack = (evt) => {
+    console.log(this.props.watched[this.props.watched.length-1-this.state.count])
+    if (this.props.watched.length-1-this.state.count === 0) {
+      return
+    }
     this.setState({
       count: this.state.count + 1,
     })
@@ -33,13 +37,13 @@ playingVid = ""
   }
 
   render() {
-    if (this.props.categoryChosen[this.props.randomNum]) {
-      this.playingVid = this.props.categoryChosen[this.props.randomNum].id
-    }
+    // if (this.props.categoryChosen[this.props.randomNum]) {
+    //   this.playingVid = this.props.categoryChosen[this.props.randomNum].id
+    // }
 
     return (
       <div>
-      {this.props.categoryChosen[this.props.randomNum]?  
+      {this.props.categoryChosen[this.props.randomNum] && this.props.watched.length?  
      <div className="videoPlayer">
         {/* <Button animated onClick ={this.handleBack} basic color='black' size='medium'>
           <Button.Content visible>Back</Button.Content>
@@ -63,14 +67,15 @@ playingVid = ""
           </Button.Content>
         </Button> */}
         <Button.Group>
-          <Button labelPosition='left' icon='left chevron' content='Back' onClick ={this.handleBack} basic color='black' size='large'/>
+          <Button labelPosition='left' icon='left chevron' content='Back' onClick ={this.handleBack} basic color='black' size='large'
+          disabled={0 === this.props.watched.length-1-this.state.count}/>
           <Button animated='fade' onClick ={this.handleFavorite} size='large' basic color='black'>
             <Button.Content visible>Favorite</Button.Content>
             <Button.Content hidden>
               <Icon name='heart' color='red'/>
             </Button.Content>
           </Button>
-          <Button labelPosition='right' icon='right chevron' content='Forward' onClick ={this.handleSkip} basic color='black' size='large'/>
+          <Button labelPosition='right' icon='right chevron' content={this.state.count === 0 ? 'New Video' : 'Forward'} onClick ={this.handleSkip} basic color='black' size='large'/>
         </Button.Group>
   
         <br></br>

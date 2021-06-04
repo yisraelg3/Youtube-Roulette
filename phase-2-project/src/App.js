@@ -12,7 +12,7 @@ import { Button, Icon, Label, Header } from 'semantic-ui-react'
 
 class App extends React.Component {
   
-  YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
+  YOUR_API_KEY = ""
 
   state = {
     categories: [],
@@ -149,18 +149,18 @@ class App extends React.Component {
     // console.log(timesCategoryWatched)
    return (
       <main className="App">
-        {this.state.userId !== 1 ?
+        {/* {this.state.userId !== 1 ? */}
         <main >
         {redirect()}
         <Route className="navBar" path='/categories' render={routerProps => { return(
         <>
         <Button as='div' labelPosition='left' floated='right' >
           <Label as='a' basic>
-            {this.state.userName}
+            Welcome {this.state.userName}!
           </Label>
-          <Button onClick = {() => this.setState({ userId: 1})}>
+          {/* <Button onClick = {() => this.setState({ userId: 1})}>
             Logout
-          </Button>
+          </Button> */}
         </Button> 
         
           <Header as='h1' textAlign='center' >
@@ -176,12 +176,12 @@ class App extends React.Component {
         transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite} userId={this.state.userId}/>
         </>)}}/>
         <Route exact path='/' render={routerProps => <UserLogin userId={this.state.userId} getUserId={this.getUserId}/> }/> 
-        <Route path='/recent' render={routeProps => <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem}/>}/>
-        <Route path='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem}/>}/>
+        <Route path='/recent' render={routeProps => <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem} userId={this.state.userId}/>}/>
+        <Route path='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem} userId={this.state.userId}/>}/>
 
         </main>
-        : 
-        <UserLogin getUserId={this.getUserId}/> }
+        {/* : 
+        <UserLogin getUserId={this.getUserId}/> } */}
       </main> 
     )
   }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import CategoryCard from './CategoryCard'
 import DisplayVideo from './DisplayVideo'
-import { Card, Input, label } from 'semantic-ui-react'
+import { Card, Input, label, Checkbox } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 
 export default class Categories extends Component {
 
-   YOUR_API_KEY = "AIzaSyBL7hy0u6_uaA_ZyIj2zDig7NEkX-60S0Q"
+   YOUR_API_KEY = ""
     
    randomNum = ''
    state = {
@@ -23,6 +23,10 @@ export default class Categories extends Component {
         const unwatchedList = chosenCategoryArray.items.filter(videoObj => {
           return !this.props.watched.find(watchedVideo => videoObj.id === watchedVideo.videoId)
         })
+        if (unwatchedList.length === 0) {
+          alert('No more videos available in this category. Please try again another time.')
+          return
+        }
         // console.log(unwatchedList)
         this.randomNum = Math.floor(Math.random() * unwatchedList.length)
         // console.log('Click arguments',category,this.randomNum)
@@ -39,6 +43,9 @@ export default class Categories extends Component {
      }
 
     render() {
+      if (this.props.userId === 1) {
+        return <Redirect to='/'/>
+      }
     
     // Logic for sorting by most times watched
     const timesCategoryWatched = this.state.sorted ?
@@ -74,8 +81,7 @@ export default class Categories extends Component {
         transferVideoId={this.props.transferVideoId}
         handleChooseCategory={this.handleChooseCategory}
         newFavorite={this.props.newFavorite}/>
-        <label htmlFor='sort'>Sort by Most Watched</label>
-        <input type='checkbox' checked={this.state.sorted} onChange={this.handleChange} id='sort'></input>
+        <Checkbox label='Sort by Most Watched' toggle checked={this.state.sorted} onChange={this.handleChange} id='sort'></Checkbox>
         <Card.Group raised itemsPerRow={4} >{categoryCards}</Card.Group>
       </main>
     )

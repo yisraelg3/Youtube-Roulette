@@ -28,10 +28,10 @@ export default class CategoryCard extends Component {
   render() {
     const {snippet,timesWatched} = this.props.category
     return (
-      <Card onClick ={this.handleClick} color='teal' size='medium'>
+      <Card onClick ={this.handleClick} color='black' size='medium'>
         <Image src={this.url[this.props.category.id]} size='big' />
-        <Card.Content textAlign>
-        <Card.Header>{snippet.title}</Card.Header>
+        <Card.Content >
+        <Card.Header >{snippet.title}</Card.Header>
         {this.props.sorted ? <Card.Meta>Chosen {timesWatched} times</Card.Meta> : ''}
         </Card.Content>
       </Card>
