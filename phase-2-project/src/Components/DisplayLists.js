@@ -11,7 +11,7 @@ export default class DisplayLists extends Component {
       <div>
         <br/>
         <iframe src={`https://www.youtube.com/embed/${this.props.videoObj.videoId}`} title='1' allowFullScreen
-        width='350' height='225'></iframe>
+        width='350' height='225' style={{width:'100%', overflow: 'auto'}}></iframe>
         <br/>
         <p>{this.props.videoObj.title}</p>
         <Button animated='fade' onClick ={this.handleClick} size='mini' basic color='black'>

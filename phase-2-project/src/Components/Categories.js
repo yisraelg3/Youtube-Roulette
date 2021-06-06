@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import CategoryCard from './CategoryCard'
 import DisplayVideo from './DisplayVideo'
-import { Card, Input, label, Checkbox } from 'semantic-ui-react'
-import { Redirect } from 'react-router-dom'
+import { Card, Checkbox } from 'semantic-ui-react'
+import { Redirect, Route } from 'react-router-dom'
 
 export default class Categories extends Component {
 
@@ -75,14 +75,21 @@ export default class Categories extends Component {
     
     return (
       <main>
-       <DisplayVideo categoryChosen={this.state.chosenCategoryVideos} 
-        randomNum = {this.randomNum} 
-        watched={this.props.watched} 
-        transferVideoId={this.props.transferVideoId}
-        handleChooseCategory={this.handleChooseCategory}
-        newFavorite={this.props.newFavorite}/>
+        {this.state.chosenCategoryVideos[this.randomNum] && this.props.watched.length?  
+        <>
+        <Redirect to={`/categories/${this.props.watched[this.props.watched.length-1].videoId}`}/>
+        <Route path='/categories/:videoId' render={routerProps => 
+          {return <DisplayVideo {...routerProps}
+            categoryChosen={this.state.chosenCategoryVideos} 
+            randomNum = {this.randomNum} 
+            watched={this.props.watched} 
+            transferVideoId={this.props.transferVideoId}
+            handleChooseCategory={this.handleChooseCategory}
+            newFavorite={this.props.newFavorite}
+          />}}
+        /> </>: ""}
         <Checkbox label='Sort by Most Watched' toggle checked={this.state.sorted} onChange={this.handleChange} id='sort'></Checkbox>
-        <Card.Group raised itemsPerRow={4} >{categoryCards}</Card.Group>
+        <Card.Group itemsPerRow={4} >{categoryCards}</Card.Group>
       </main>
     )
   }

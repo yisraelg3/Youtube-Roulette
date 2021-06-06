@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Icon } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
 export default class DisplayVideo extends Component {
 
@@ -32,7 +33,7 @@ playingVid = ""
       })
     } 
     else {
-      this.props.handleChooseCategory(this.props.categoryChosen[this.props.categoryChosen.length-1].snippet.categoryId)
+      this.props.handleChooseCategory(this.props.watched[this.props.watched.length-1-this.state.count].category)
     }
   }
 
@@ -43,7 +44,7 @@ playingVid = ""
 
     return (
       <div>
-      {this.props.categoryChosen[this.props.randomNum] && this.props.watched.length?  
+      
      <div className="videoPlayer">
         {/* <Button animated onClick ={this.handleBack} basic color='black' size='medium'>
           <Button.Content visible>Back</Button.Content>
@@ -51,7 +52,8 @@ playingVid = ""
             <Icon name='arrow left' />
           </Button.Content>
         </Button> */}
-        <iframe src={`https://www.youtube.com/embed/${this.props.watched[this.props.watched.length-1-this.state.count].videoId}?autoplay=1`} 
+        <Redirect to={`/categories/${this.props.watched[this.props.watched.length-1-this.state.count].videoId}`}/>
+ <iframe src={`https://www.youtube.com/embed/${this.props.watched[this.props.watched.length-1-this.state.count].videoId}?autoplay=1`} 
           title='1' allow="autoplay; fullscreen" width='900' height='600'></iframe> 
         {/* <Button animated onClick ={this.handleSkip} basic color='black' size='medium'>
           <Button.Content visible>Next</Button.Content>
@@ -81,10 +83,12 @@ playingVid = ""
         <br></br>
       </div>
       
-      : ""}
+
       </div>
      
         )
 
   }
 }
+
+

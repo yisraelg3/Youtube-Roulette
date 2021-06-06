@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Grid } from 'semantic-ui-react'
 
 export default class NavBar extends Component {
   render() {

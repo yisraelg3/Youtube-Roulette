@@ -35,7 +35,7 @@ class App extends React.Component {
         categories: categoryArr
       })
     })
-  }
+  } 
 
   getUserId = (user) => {
     this.setState({
@@ -123,8 +123,15 @@ class App extends React.Component {
     })}
     
     logout = () => {
-      // console.log(this.state.userId)
-      this.setState({userId: 1})
+      fetch(`http://localhost:3000/users/${this.state.userId}`, {
+        method: "PATCH",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({recent:[]})
+      })
+      .then(res => res.json())
+      .then(this.setState({userId: 1}))
     }
 
   render  () {
@@ -172,12 +179,12 @@ class App extends React.Component {
           </Header> 
         
         <Search whatUserTyped={this.state.whatUserTyped} changeSearchTerm={this.changeSearchTerm}/>
-        <Categories categories={filteredCategories} watched={this.state.watched} 
+        <Categories {...routerProps} categories={filteredCategories} watched={this.state.watched} logout={this.logout}
         transferVideoId ={this.transferVideoId} newFavorite={this.newFavorite} userId={this.state.userId}/>
         </>)}}/>
         <Route exact path='/' render={routerProps => <UserLogin userId={this.state.userId} getUserId={this.getUserId}/> }/> 
-        <Route path='/recent' render={routeProps => <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem} userId={this.state.userId}/>}/>
-        <Route path='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem} userId={this.state.userId}/>}/>
+        <Route path='/recent' render={routeProps => <GenerateLists header='Recent' list={this.state.recent} deleteItem={this.deleteItem} userId={this.state.userId} logout={this.logout}/>}/>
+        <Route path='/favorites' render={routerProps => <GenerateLists header='Favorites' list={this.state.favorites} deleteItem={this.deleteItem} userId={this.state.userId} logout={this.logout}/>}/>
 
         </main>
         {/* : 

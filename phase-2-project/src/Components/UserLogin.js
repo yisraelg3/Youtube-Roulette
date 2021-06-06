@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, Header, Checkbox, Form, Input } from 'semantic-ui-react'
+import { Button, Icon, Header, Checkbox, Form } from 'semantic-ui-react'
 
 export default class UserLogin extends Component {
   
@@ -102,7 +102,7 @@ export default class UserLogin extends Component {
               <label>Password</label>
               <input type ='password' value={this.state.password} id='password' name='password' onChange={this.handleChange} placeholder='Enter Password' />
             </Form.Field>
-            <Button type='submit'>Submit</Button>
+            <Button type='submit'>Login</Button>
           </Form>
         </div>
         :
@@ -131,7 +131,7 @@ export default class UserLogin extends Component {
                 <Form.Field>
                   <Checkbox label='I agree to the Terms and Conditions' />
                 </Form.Field>
-                <Button type='submit'>Submit</Button>
+                <Button type='submit'>Create Account</Button>
               </Form>
         </div>}
       </div>

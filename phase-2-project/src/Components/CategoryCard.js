@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
 export default class CategoryCard extends Component {
   
@@ -28,7 +28,7 @@ export default class CategoryCard extends Component {
   render() {
     const {snippet,timesWatched} = this.props.category
     return (
-      <Card onClick ={this.handleClick} color='black' size='medium'>
+      <Card onClick ={this.handleClick} color='black' size='medium' raised>
         <Image src={this.url[this.props.category.id]} size='big' />
         <Card.Content >
         <Card.Header >{snippet.title}</Card.Header>

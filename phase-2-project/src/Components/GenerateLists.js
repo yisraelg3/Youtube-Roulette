@@ -8,7 +8,7 @@ export default class GenerateLists extends Component {
     if (this.props.userId === 1) {
       return <Redirect to='/'/>
     }
-    const videos= this.props.list.map(videoObj => <Grid.Column><DisplayLists key={videoObj.videoId} header={this.props.header} videoObj={videoObj} deleteItem={this.props.deleteItem}/></Grid.Column>)
+    const videos= this.props.list.map(videoObj => <Grid.Column key={videoObj.videoId}><DisplayLists header={this.props.header} videoObj={videoObj} deleteItem={this.props.deleteItem}/></Grid.Column>)
     return (
       <div>
         <Header as='h1' textAlign='center' >
